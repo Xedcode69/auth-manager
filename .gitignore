@@ -2,3 +2,5 @@ node_modules/
 
 #ignore env variable file
 .env
+
+log/

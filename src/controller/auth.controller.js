@@ -1,6 +1,7 @@
 import User from '../models/user.model.js';
 import jwtToken from '../utils/jwt.util.js';
 import bcrypt from 'bcrypt';
+import logger from '../config/logger.config.js';
 
 
 export const signUp = async(req, res)=>{
@@ -26,7 +27,7 @@ export const signUp = async(req, res)=>{
         })
 
     } catch (error) {
-        console.log("signup error", error);
+        logger.error("signup error", error);
         return res.status(500).json({message: error.message});
     }
 }
@@ -65,7 +66,7 @@ export const signIn = async(req, res)=>{
 
 
     } catch (error) {
-        console.log("sign in error", error);
+        logger.error("sign in error", error);
         return res.status(503).json({
             message: error.message
         });

@@ -11,7 +11,7 @@ const connection = app.listen(PORT, ()=>{
             console.log(`Connection established on http://localhost:${PORT}`);
         }
     } catch (error) {
-        console.log('Cannot connect to server', error);
+        logger.error('Cannot connect to server', error);
     }
 })
 
