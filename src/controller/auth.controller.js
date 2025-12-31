@@ -31,3 +31,47 @@ export const signUp = async(req, res)=>{
     }
 }
 
+
+export const signIn = async(req, res)=>{
+
+    try {
+        const {email, password} = req.body;
+
+        const user = await User.findOne({email: email}).select("+password");
+
+        if (!user){
+            return res.status(509).json({
+                message: "no user found for that email"
+            });
+        }       
+
+        const isPassword = await bcrypt.compare(password, user.password);
+
+        if (!isPassword){
+            return res.status(403).json({
+                message: "password incorrect"
+            });
+        }
+
+        const token = jwtToken.sign({token: user._id});
+
+
+        return res.status(200).json({
+            success: true,
+            message: "signed in succesfully",
+            token
+        })
+
+
+
+    } catch (error) {
+        console.log("sign in error", error);
+        return res.status(503).json({
+            message: error.message
+        });
+    }
+}
+
+
+
+
