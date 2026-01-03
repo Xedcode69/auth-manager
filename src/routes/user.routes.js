@@ -6,8 +6,8 @@ const userRoutes = Router();
 
 userRoutes.get('/',  checkAdmin ,getAllUsers );
 
-userRoutes.get('/user/:id', getUser );
+userRoutes.get('/:id', getUser );
 
-userRoutes.delete('/user/:id/delete', checkAdmin, deleteUser);
+userRoutes.delete('/:id/delete', checkAdmin, deleteUser);
 
 export default userRoutes;
