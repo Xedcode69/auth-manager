@@ -21,7 +21,7 @@ export const signUp = async(req, res)=>{
 
         const token = jwtToken.sign({payload: newUser._id});
 
-        cookies.set(res, 'token', token);
+        cookies.set(res, 'AUTH_TOKEN', token);
 
         res.status(200).json({
             success: true,
@@ -31,7 +31,6 @@ export const signUp = async(req, res)=>{
                 email: newUser.email,
                 role: newUser.role
             },
-            token
         })
 
     } catch (error) {
@@ -64,7 +63,7 @@ export const signIn = async(req, res)=>{
 
         const token = jwtToken.sign({payload: user._id});
 
-        cookies.set(res, 'token', token);
+        cookies.set(res, 'AUTH_TOKEN', token);
 
 
         return res.status(200).json({
@@ -90,7 +89,7 @@ export const signIn = async(req, res)=>{
 export const signOut = (req, res)=>{
 
     try {
-        cookies.clear(res, 'token');
+        cookies.clear(res, 'AUTH_TOKEN');
 
         return res.status(200).json({
             success: true,
